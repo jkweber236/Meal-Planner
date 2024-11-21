@@ -3,9 +3,9 @@ const router = express.Router();
 
 const mealPlanController = require('../controllers/mealPlan');
 
-router.get('/:id', mealPlanController.getmealPlan);
-router.post('/', mealPlanController.createmealPlan);
-router.put('/:id', mealPlanController.updatemealPlan);
-router.delete('/:id', mealPlanController.deletemealPlan);
+router.get('/:id', mealPlanController.getMealPlan);
+router.post('/', mealPlanController.createMealPlan);
+router.put('/:id', mealPlanController.updateMealPlan);
+router.delete('/:id', mealPlanController.deleteMealPlan);
 
 module.exports = router;
