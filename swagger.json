@@ -21,7 +21,7 @@
         }
       }
     },
-    "/user/": {
+    "/users/": {
       "get": {
         "description": "",
         "responses": {
@@ -39,7 +39,7 @@
         }
       }
     },
-    "/user/{id}": {
+    "/users/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -89,7 +89,7 @@
         }
       }
     },
-    "/user/{id}/favorites": {
+    "/users/{id}/favorites": {
       "get": {
         "description": "",
         "parameters": [
@@ -123,7 +123,7 @@
         }
       }
     },
-    "/user/{id}/favorite/{recipeID}": {
+    "/users/{id}/favorite/{recipeID}": {
       "delete": {
         "description": "",
         "parameters": [
@@ -147,12 +147,18 @@
         }
       }
     },
-    "/recipe/": {
+    "/recipes/": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -165,7 +171,7 @@
         }
       }
     },
-    "/recipe/{id}": {
+    "/recipes/{id}": {
       "get": {
         "description": "",
         "parameters": [
