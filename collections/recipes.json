@@ -1,0 +1,77 @@
+[
+    {
+      "creatorID": "user123",
+      "name": "Spaghetti Carbonara",
+      "category": "Italian",
+      "ingredients": [
+        { "item": "Spaghetti", "quantity": "200g" },
+        { "item": "Eggs", "quantity": "2 large" },
+        { "item": "Parmesan Cheese", "quantity": "50g" },
+        { "item": "Pancetta", "quantity": "100g" },
+        { "item": "Black Pepper", "quantity": "to taste" },
+        { "item": "Salt", "quantity": "to taste" }
+      ],
+      "instructions": [
+        "Cook the spaghetti in salted boiling water until al dente.",
+        "In a bowl, whisk the eggs with grated Parmesan cheese.",
+        "Fry the pancetta until crispy.",
+        "Drain the pasta, reserving some cooking water.",
+        "Mix the hot pasta with the egg and cheese mixture, adding reserved water if needed.",
+        "Stir in the pancetta and season with black pepper."
+      ],
+      "prepTime": "10 minutes",
+      "cookTime": "15 minutes",
+      "createdDate": "2024-11-21"
+    },
+    {
+      "creatorID": "user124",
+      "name": "Pancakes",
+      "category": "Breakfast",
+      "ingredients": [
+        { "item": "Flour", "quantity": "1 cup" },
+        { "item": "Milk", "quantity": "1 cup" },
+        { "item": "Egg", "quantity": "1 large" },
+        { "item": "Butter", "quantity": "2 tbsp, melted" },
+        { "item": "Baking Powder", "quantity": "2 tsp" },
+        { "item": "Sugar", "quantity": "2 tbsp" },
+        { "item": "Salt", "quantity": "1/4 tsp" }
+      ],
+      "instructions": [
+        "In a bowl, mix the flour, baking powder, sugar, and salt.",
+        "Whisk together the milk, egg, and melted butter in another bowl.",
+        "Combine wet and dry ingredients, mixing until just combined.",
+        "Heat a lightly oiled griddle over medium heat.",
+        "Pour 1/4 cup of batter for each pancake and cook until bubbles form.",
+        "Flip and cook until golden brown on both sides."
+      ],
+      "prepTime": "5 minutes",
+      "cookTime": "15 minutes",
+      "createdDate": "2024-11-21"
+    },
+    {
+      "creatorID": "user125",
+      "name": "Chicken Stir Fry",
+      "category": "Asian",
+      "ingredients": [
+        { "item": "Chicken Breast", "quantity": "300g, sliced" },
+        { "item": "Soy Sauce", "quantity": "2 tbsp" },
+        { "item": "Garlic", "quantity": "2 cloves, minced" },
+        { "item": "Ginger", "quantity": "1 tsp, minced" },
+        { "item": "Vegetable Oil", "quantity": "2 tbsp" },
+        { "item": "Mixed Vegetables", "quantity": "2 cups" },
+        { "item": "Cornstarch", "quantity": "1 tsp (optional)" }
+      ],
+      "instructions": [
+        "Marinate chicken slices in soy sauce, garlic, and ginger for 15 minutes.",
+        "Heat vegetable oil in a wok or large skillet.",
+        "Stir fry chicken until lightly browned and cooked through.",
+        "Add mixed vegetables and stir fry for another 5 minutes.",
+        "Optional: Add cornstarch dissolved in water to thicken the sauce.",
+        "Serve hot over steamed rice."
+      ],
+      "prepTime": "10 minutes",
+      "cookTime": "15 minutes",
+      "createdDate": "2024-11-21"
+    }
+]
+  
