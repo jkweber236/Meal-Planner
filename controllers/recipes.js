@@ -2,7 +2,7 @@ const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAllRecipes = async (req, res) => {
-    mongodb
+    await mongodb
     .getDb()
     .db('MealPlanner')
     .collection('recipes')
