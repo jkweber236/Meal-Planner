@@ -5,8 +5,26 @@
     "description": "Meal Planner API",
     "version": "1.0.0"
   },
-  "host": "meal-planner-CSE341.onrender.com",
+  "host": "meal-planner-cse341.onrender.com",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Endpoints for managing users"
+    },
+    {
+      "name": "Recipes",
+      "description": "Endpoints for managing recipes"
+    },
+    {
+      "name": "Meal Plans",
+      "description": "Endpoints for managing meal plans"
+    },
+    {
+      "name": "Grocery Lists",
+      "description": "Endpoints for managing grocery lists"
+    }
+  ],
   "schemes": [
     "https"
   ],
@@ -23,6 +41,10 @@
     },
     "/users/": {
       "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retrieve all users",
         "description": "",
         "responses": {
           "default": {
@@ -31,6 +53,10 @@
         }
       },
       "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a new user",
         "description": "",
         "responses": {
           "default": {
@@ -41,13 +67,18 @@
     },
     "/users/{id}": {
       "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retrieve a user by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "User ID"
           }
         ],
         "responses": {
@@ -57,6 +88,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update a user by ID",
         "description": "",
         "parameters": [
           {
@@ -73,6 +108,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete a user by ID",
         "description": "",
         "parameters": [
           {
@@ -91,6 +130,10 @@
     },
     "/users/{id}/favorites": {
       "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retrieve a user\\'s favorites",
         "description": "",
         "parameters": [
           {
@@ -107,6 +150,10 @@
         }
       },
       "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add a favorite for a user",
         "description": "",
         "parameters": [
           {
@@ -125,6 +172,10 @@
     },
     "/users/{id}/favorite/{recipeID}": {
       "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Remove a favorite recipe for a user",
         "description": "",
         "parameters": [
           {
@@ -149,6 +200,10 @@
     },
     "/recipes/": {
       "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Retrieve all recipes",
         "description": "",
         "produces": [
           "application/json"
@@ -163,6 +218,10 @@
         }
       },
       "post": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Create a new recipe",
         "description": "",
         "responses": {
           "default": {
@@ -173,13 +232,18 @@
     },
     "/recipes/{id}": {
       "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Retrieve a recipe by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
@@ -189,13 +253,18 @@
         }
       },
       "put": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Update a recipe by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
@@ -205,13 +274,18 @@
         }
       },
       "delete": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Delete a recipe by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Recipe ID"
           }
         ],
         "responses": {
@@ -223,13 +297,18 @@
     },
     "/meal-plan/{id}": {
       "get": {
+        "tags": [
+          "Meal Plans"
+        ],
+        "summary": "Retrieve a meal plan by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Meal Plan ID"
           }
         ],
         "responses": {
@@ -239,13 +318,18 @@
         }
       },
       "put": {
+        "tags": [
+          "Meal Plans"
+        ],
+        "summary": "Update a meal plan by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Meal Plan ID"
           }
         ],
         "responses": {
@@ -255,13 +339,18 @@
         }
       },
       "delete": {
+        "tags": [
+          "Meal Plans"
+        ],
+        "summary": "Delete a meal plan by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Meal Plan ID"
           }
         ],
         "responses": {
@@ -273,6 +362,10 @@
     },
     "/meal-plan/": {
       "post": {
+        "tags": [
+          "Meal Plans"
+        ],
+        "summary": "Create a new meal plan",
         "description": "",
         "responses": {
           "default": {
@@ -283,13 +376,18 @@
     },
     "/grocery-list/{id}": {
       "get": {
+        "tags": [
+          "Grocery Lists"
+        ],
+        "summary": "Retrieve a grocery list by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Grocery List ID"
           }
         ],
         "responses": {
@@ -299,13 +397,18 @@
         }
       },
       "put": {
+        "tags": [
+          "Grocery Lists"
+        ],
+        "summary": "Update a grocery list by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Grocery List ID"
           }
         ],
         "responses": {
@@ -315,13 +418,18 @@
         }
       },
       "delete": {
+        "tags": [
+          "Grocery Lists"
+        ],
+        "summary": "Delete a grocery list by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Grocery List ID"
           }
         ],
         "responses": {
@@ -333,6 +441,10 @@
     },
     "/grocery-list/": {
       "post": {
+        "tags": [
+          "Grocery Lists"
+        ],
+        "summary": "Create a new grocery list",
         "description": "",
         "responses": {
           "default": {
