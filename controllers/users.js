@@ -41,8 +41,10 @@ const getFavorites = async (req, res) => {
     if (!response) {
       return res.status(404).json({ message: 'User not found' });
     }
+    // Extract the favorite recipe IDs
+    const favoriteRecipeIds = user.favoriteRecipes || [];
 
-    const favoriteRecipeIds = response.favoriteRecipes || [];
+    // Fetch all favorite recipes using Promise.all
     const favoriteRecipes = await Promise.all(
       favoriteRecipeIds.map((id) =>
         mongodb
