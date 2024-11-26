@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a new recipe
-router.post('/', (req, res) => {
+router.post('/:userid', (req, res) => {
   // #swagger.tags = ['Recipes']
   // #swagger.summary = 'Create a new recipe'
   recipesController.createRecipe(req, res);
