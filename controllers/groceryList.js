@@ -82,9 +82,9 @@ const deleteGroceryList = async (req, res) => {
       .deleteOne({ _id: listId });
 
     if (response.deletedCount > 0) {
-      res.status(200).json({ message: 'User deleted successfully' });
+      res.status(200).json({ message: 'Grocery list deleted successfully' });
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: 'Grocery list not found' });
     }
   } catch (err) {
     res.status(400).json({ message: err.message });
