@@ -5,7 +5,7 @@
     "description": "Meal Planner API",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "meal-planner-cse341.onrender.com",
   "basePath": "/",
   "tags": [
     {
@@ -26,7 +26,7 @@
     }
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/api-docs": {
@@ -222,7 +222,7 @@
         "tags": [
           "Users"
         ],
-        "summary": "Retrieve a user\\'s favorites",
+        "summary": "Retrieve a user",
         "description": "",
         "parameters": [
           {
