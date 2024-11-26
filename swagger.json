@@ -272,9 +272,6 @@
         ],
         "summary": "Retrieve all recipes",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -292,9 +289,6 @@
         ],
         "summary": "Retrieve a recipe by ID",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -319,9 +313,6 @@
         ],
         "summary": "Update a recipe by ID",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -386,8 +377,11 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -399,9 +393,6 @@
         ],
         "summary": "Create a new recipe",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "userid",

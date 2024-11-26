@@ -3,10 +3,8 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAllRecipes = async (req, res) => {
   try {
-    const recipes = await mongodb.getDb().db('MealPlanner').collection('recipes').find().toArray();
-
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(recipes);
+    const response = await mongodb.getDb().db('MealPlanner').collection('recipes').find().toArray();
+    res.status(200).json(response);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -15,9 +13,8 @@ const getAllRecipes = async (req, res) => {
 const getRecipe = async (req, res) => {
   try {
     const recipeId = new ObjectId(req.params.id);
-    const recipe = await mongodb.getDb().db('MealPlanner').collection('recipes').find({ _id: recipeId }).toArray();
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(recipe);
+    const response = await mongodb.getDb().db('MealPlanner').collection('recipes').find({ _id: recipeId }).toArray();
+    res.status(200).json(response);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -36,7 +33,6 @@ const createRecipe = async (req, res) => {
       createdDate: new Date().toISOString().split('T')[0]
     };
     const response = await mongodb.getDb().db('MealPlanner').collection('recipes').insertOne(recipe);
-    res.setHeader('Content-Type', 'application/json');
     res.status(201).json(response);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -62,13 +58,20 @@ const updateRecipe = async (req, res) => {
       return res.status(404).json({ message: "Recipe not found" });
     }
     const updatedRecipe = await mongodb.getDb().db('MealPlanner').collection('recipes').findOne({ _id: recipeId });
-    res.setHeader('Content-Type', 'application/json');
     res.status(200).json(updatedRecipe);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-const deleteRecipe = async (/*req, res*/) => {};
+const deleteRecipe = async (req, res) => {
+  try {
+    const recipeId = new ObjectId(req.params.id)
+    const response = await mongodb.getDb().db('MealPlanner').collection('recipes').deleteOne({ _id: recipeId });
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 module.exports = { getAllRecipes, getRecipe, createRecipe, updateRecipe, deleteRecipe };
