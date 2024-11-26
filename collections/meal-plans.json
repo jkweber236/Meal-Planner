@@ -1,0 +1,38 @@
+[
+    {
+      "weekStart": "2024-11-25",
+      "weekEnd": "2024-12-01",
+      "createdDate": "2024-11-21",
+      "meals": [
+        {
+          "mealDay": "Monday",
+          "recipeID": "6740492e5a6a3656aaee96fa"
+        },
+        {
+          "mealDay": "Tuesday",
+          "recipeID": "6740492e5a6a3656aaee96fc"
+        },
+        {
+          "mealDay": "Wednesday",
+          "recipeID": null
+        },
+        {
+          "mealDay": "Thursday",
+          "recipeID": null
+        },
+        {
+          "mealDay": "Friday",
+          "recipeID": "6740492e5a6a3656aaee96fa"
+        },
+        {
+          "mealDay": "Saturday",
+          "recipeID": "6740492e5a6a3656aaee96fc"
+        },
+        {
+          "mealDay": "Sunday",
+          "recipeID": null
+        }
+      ]
+    }
+  ]
+  
