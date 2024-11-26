@@ -77,7 +77,33 @@ const createMealPlan = async (req, res) => {
     }
 };
   
-const updateMealPlan = async (/*req, res*/) => {};
-const deleteMealPlan = async (/*req, res*/) => {};
+const updateMealPlan = async (req, res) => {
+    try {
+        const mealPlanId = new ObjectId(req.params.id);
+        const updatedFields = {
+            meals: [
+                { mealDay: "Monday", recipeID: req.body.monRecipeID || null },
+                { mealDay: "Tuesday", recipeID: req.body.tuesRecipeID || null },
+                { mealDay: "Wednesday", recipeID: req.body.wedRecipeID || null },
+                { mealDay: "Thursday", recipeID: req.body.thursRecipeID || null },
+                { mealDay: "Friday", recipeID: req.body.friRecipeID || null },
+                { mealDay: "Saturday", recipeID: req.body.satRecipeID || null },
+                { mealDay: "Sunday", recipeID: req.body.sunRecipeID || null }
+            ]
+        };
+        const response = await mongodb.getDb().db('MealPlanner').collection('meal-plan').updateOne(
+            { _id: mealPlanId },
+            { $set: updatedFields }
+        );
+        if (response.matchedCount === 0)
+            return res.status(404).json({ message: "Meal plan not found" });
+        const updatedMealPlan = await mongodb.getDb().db('MealPlanner').collection('meal-plan').findOne({ _id: mealPlanId });
+        res.status(200).json(updatedMealPlan);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+};
+
+const deleteMealPlan = async (req, res) => {};
 
 module.exports = { getMealPlan, createMealPlan, updateMealPlan, deleteMealPlan }
