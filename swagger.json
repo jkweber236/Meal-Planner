@@ -5,7 +5,7 @@
     "description": "Meal Planner API",
     "version": "1.0.0"
   },
-  "host": "meal-planner-cse341.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "tags": [
     {
@@ -26,7 +26,7 @@
     }
   ],
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/api-docs": {
@@ -46,9 +46,15 @@
         ],
         "summary": "Retrieve all users",
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -58,9 +64,44 @@
         ],
         "summary": "Create a new user",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "createdRecipes": {
+                  "example": "any"
+                },
+                "favoriteRecipes": {
+                  "example": "any"
+                },
+                "mealPlans": {
+                  "example": "any"
+                },
+                "groceryList": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -72,6 +113,9 @@
         ],
         "summary": "Retrieve a user by ID",
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -82,8 +126,14 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -135,6 +185,9 @@
         ],
         "summary": "Retrieve a user\\'s favorites",
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -144,11 +197,19 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
-      },
+      }
+    },
+    "/users/{id}/favorites/{recipeID}": {
       "post": {
         "tags": [
           "Users"
@@ -158,6 +219,12 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recipeID",
             "in": "path",
             "required": true,
             "type": "string"

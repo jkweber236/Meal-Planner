@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 });
 
 // Add a favorite for a user
-router.post('/:id/favorites', (req, res) => {
+router.post('/:id/favorites/:recipeID', (req, res) => {
   // #swagger.tags = ['Users']
   // #swagger.summary = 'Add a favorite for a user'
   usersController.addFavorite(req, res);

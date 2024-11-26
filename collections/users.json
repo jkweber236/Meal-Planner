@@ -1,0 +1,29 @@
+[
+  {
+    "username": "user123",
+    "password": "password123",
+    "email": "example@gmail.com",
+    "createdRecipes": ["6740492e5a6a3656aaee96fa", "6740492e5a6a3656aaee96fb"],
+    "favoriteRecipes": ["6740492e5a6a3656aaee96fc"],
+    "mealPlans": [],
+    "groceryList": ""
+  },
+  {
+    "username": "user456",
+    "password": "password456",
+    "email": "user456@example.com",
+    "createdRecipes": ["6740492e5a6a3656aaee96fa"],
+    "favoriteRecipes": ["6740492e5a6a3656aaee96fb", "6740492e5a6a3656aaee96fc"],
+    "mealPlans": [],
+    "groceryList": ""
+  },
+  {
+    "username": "user789",
+    "password": "password789",
+    "email": "user789@example.com",
+    "createdRecipes": [],
+    "favoriteRecipes": ["6740492e5a6a3656aaee96fa"],
+    "mealPlans": [],
+    "groceryList": ""
+  }
+]
