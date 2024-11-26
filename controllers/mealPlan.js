@@ -104,6 +104,14 @@ const updateMealPlan = async (req, res) => {
     }
 };
 
-const deleteMealPlan = async (req, res) => {};
+const deleteMealPlan = async (req, res) => {
+    try {
+        const mealPlanId = new ObjectId(req.params.id)
+        const response = await mongodb.getDb().db('MealPlanner').collection('meal-plan').deleteOne({ _id: mealPlanId });
+        res.status(200).json(response);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 module.exports = { getMealPlan, createMealPlan, updateMealPlan, deleteMealPlan }
