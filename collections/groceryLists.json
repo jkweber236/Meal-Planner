@@ -1,0 +1,38 @@
+[
+  {
+    "items": [
+      { "item": "apples", "quantity": 1 },
+      { "item": "bananas", "quantity": 2 },
+      { "item": "carrots", "quantity": 3 },
+      { "item": "doritos", "quantity": 1 }
+    ],
+    "creationDate": "2024/09/07"
+  },
+  {
+    "items": [
+      { "item": "milk", "quantity": 1 },
+      { "item": "bread", "quantity": 2 },
+      { "item": "eggs", "quantity": 12 },
+      { "item": "cheese", "quantity": 1 }
+    ],
+    "creationDate": "2024/10/15"
+  },
+  {
+    "items": [
+      { "item": "potatoes", "quantity": 5 },
+      { "item": "onions", "quantity": 3 },
+      { "item": "tomatoes", "quantity": 4 },
+      { "item": "chicken breasts", "quantity": 2 }
+    ],
+    "creationDate": "2024/11/01"
+  },
+  {
+    "items": [
+      { "item": "pasta", "quantity": 1 },
+      { "item": "tomato sauce", "quantity": 2 },
+      { "item": "ground beef", "quantity": 1 },
+      { "item": "parmesan cheese", "quantity": 1 }
+    ],
+    "creationDate": "2024/11/20"
+  }
+]

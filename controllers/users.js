@@ -3,10 +3,8 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await mongodb.getDb().db('MealPlanner').collection('users').find().toArray();
-
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(users);
+    const response = await mongodb.getDb().db('MealPlanner').collection('users').find().toArray();
+    res.status(200).json(response);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -15,17 +13,16 @@ const getAllUsers = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
-    const user = await mongodb
+    const response = await mongodb
       .getDb()
       .db('MealPlanner')
       .collection('users')
       .findOne({ _id: userId });
 
-    if (!user) {
-      return res.status(404).json({ message: 'Application not found' });
+    if (!response) {
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    res.setHeader('Content-Type', 'application/json');
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -35,28 +32,27 @@ const getUser = async (req, res) => {
 const getFavorites = async (req, res) => {
   try {
     const userId = new ObjectId(req.params.id);
-    const user = await mongodb
+    const response = await mongodb
       .getDb()
       .db('MealPlanner')
       .collection('users')
       .findOne({ _id: userId });
-    if (!user) {
+
+    if (!response) {
       return res.status(404).json({ message: 'User not found' });
     }
-    // Extract the favorite recipe IDs
-    const favoriteRecipeIds = user.favoriteRecipes || [];
 
-    // Fetch all favorite recipes using Promise.all
+    const favoriteRecipeIds = user.favoriteRecipes || [];
     const favoriteRecipes = await Promise.all(
-      favoriteRecipeIds.map(async (id) => {
-        return await mongodb
+      favoriteRecipeIds.map((id) =>
+        mongodb
           .getDb()
           .db('MealPlanner')
-          .collection('recipes') // Assuming the recipes are stored in a 'recipes' collection
-          .findOne({ _id: new ObjectId(id) });
-      })
+          .collection('recipes')
+          .findOne({ _id: new ObjectId(id) })
+      )
     );
-    res.setHeader('Content-Type', 'application/json');
+
     res.status(200).json(favoriteRecipes);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -64,27 +60,145 @@ const getFavorites = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const newUser = {
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-    createdRecipes: req.body.createdRecipes,
-    favoriteRecipes: req.body.favoriteRecipes,
-    mealPlans: req.body.mealPlans,
-    groceryList: req.body.groceryList
-  };
-  const response = await mongodb.getDb().db('MealPlanner').collection('users').insertOne(newUser);
-  if (response.acknowledged) {
-    res.status(201).json(response);
-  } else {
-    res.status(500).json(response.error || "That didn't work..");
+  try {
+    const newUser = {
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      createdRecipes: req.body.createdRecipes || [],
+      favoriteRecipes: req.body.favoriteRecipes || [],
+      mealPlans: req.body.mealPlans || [],
+      groceryList: req.body.groceryList || ''
+    };
+
+    const response = await mongodb.getDb().db('MealPlanner').collection('users').insertOne(newUser);
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    } else {
+      res.status(500).json({ message: 'Failed to create user' });
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 };
 
-const addFavorite = async (/*req, res*/) => {};
-const updateUser = async (/*req, res*/) => {};
-const deleteUser = async (/*req, res*/) => {};
-const removeFavorite = async (/*req, res*/) => {};
+const addFavorite = async (req, res) => {
+  try {
+    const userId = new ObjectId(req.params.id);
+    const response = await mongodb
+      .getDb()
+      .db('MealPlanner')
+      .collection('users')
+      .findOne({ _id: userId });
+
+    if (!response) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const recipeId = req.params.recipeID;
+    if (response.favoriteRecipes && response.favoriteRecipes.includes(recipeId)) {
+      return res.status(400).json({ message: 'Recipe is already in favorites' });
+    }
+
+    const result = await mongodb
+      .getDb()
+      .db('MealPlanner')
+      .collection('users')
+      .updateOne({ _id: userId }, { $addToSet: { favoriteRecipes: recipeId } });
+
+    if (result.modifiedCount > 0) {
+      res.status(201).json({ message: 'Recipe added to favorites' });
+    } else {
+      res.status(500).json({ message: 'Failed to add favorite recipe' });
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    const userId = new ObjectId(req.params.id);
+
+    const updateUser = {
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      createdRecipes: req.body.createdRecipes || [],
+      favoriteRecipes: req.body.favoriteRecipes || [],
+      mealPlans: req.body.mealPlans || [],
+      groceryList: req.body.groceryList || ''
+    };
+
+    const response = await mongodb
+      .getDb()
+      .db('MealPlanner')
+      .collection('users')
+      .replaceOne({ _id: userId }, updateUser);
+
+    if (response.modifiedCount > 0) {
+      res.status(200).json({ message: 'User updated successfully' });
+    } else {
+      res.status(404).json({ message: 'User not found or no changes made' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const userId = new ObjectId(req.params.id);
+
+    const response = await mongodb
+      .getDb()
+      .db('MealPlanner')
+      .collection('users')
+      .deleteOne({ _id: userId });
+
+    if (response.deletedCount > 0) {
+      res.status(200).json({ message: 'User deleted successfully' });
+    } else {
+      res.status(500).json({ message: 'User not found' });
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const removeFavorite = async (req, res) => {
+  try {
+    const userId = new ObjectId(req.params.id);
+    const response = await mongodb
+      .getDb()
+      .db('MealPlanner')
+      .collection('users')
+      .findOne({ _id: userId });
+
+    if (!response) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const recipeId = req.params.recipeID;
+    if (!response.favoriteRecipes || !response.favoriteRecipes.includes(recipeId)) {
+      return res.status(400).json({ message: 'Recipe is already not a favorite' });
+    }
+
+    const result = await mongodb
+      .getDb()
+      .db('MealPlanner')
+      .collection('users')
+      .updateOne({ _id: userId }, { $pull: { favoriteRecipes: recipeId } });
+
+    if (result.modifiedCount > 0) {
+      res.status(200).json({ message: 'Recipe removed from favorites' });
+    } else {
+      res.status(500).json({ message: 'Failed to remove favorite recipe' });
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
 module.exports = {
   getAllUsers,
