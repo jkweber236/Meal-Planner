@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const recipesController = require('../controllers/recipes');
+const requiresAuth = require('../middleware/requiresAuth');
 
 // Get all recipes
 router.get('/', (req, res) => {
@@ -18,14 +19,14 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a new recipe
-router.post('/:userid', (req, res) => {
+router.post('/:userid', requiresAuth(), (req, res) => {
   // #swagger.tags = ['Recipes']
   // #swagger.summary = 'Create a new recipe'
   recipesController.createRecipe(req, res);
 });
 
 // Update a recipe by ID
-router.put('/:id', (req, res) => {
+router.put('/:id', requiresAuth(), (req, res) => {
   // #swagger.tags = ['Recipes']
   // #swagger.summary = 'Update a recipe by ID'
   // #swagger.parameters['id'] = { description: 'Recipe ID' }
@@ -33,7 +34,7 @@ router.put('/:id', (req, res) => {
 });
 
 // Delete a recipe by ID
-router.delete('/:id', (req, res) => {
+router.delete('/:id', requiresAuth(), (req, res) => {
   // #swagger.tags = ['Recipes']
   // #swagger.summary = 'Delete a recipe by ID'
   // #swagger.parameters['id'] = { description: 'Recipe ID' }

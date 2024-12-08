@@ -23,7 +23,7 @@ const getUser = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.status(200).json(user);
+    res.status(200).json(response);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -42,7 +42,7 @@ const getFavorites = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
     // Extract the favorite recipe IDs
-    const favoriteRecipeIds = user.favoriteRecipes || [];
+    const favoriteRecipeIds = response.favoriteRecipes || [];
 
     // Fetch all favorite recipes using Promise.all
     const favoriteRecipes = await Promise.all(
