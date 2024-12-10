@@ -222,7 +222,7 @@
         "tags": [
           "Users"
         ],
-        "summary": "Retrieve a user",
+        "summary": "Retrieve a user's favorites",
         "description": "",
         "parameters": [
           {

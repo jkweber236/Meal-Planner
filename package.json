@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "jest",
     "swagger": "node ./swagger.js",
     "start": "nodemon server.js"
   },
@@ -28,5 +28,9 @@
     "supertest": "^7.0.0",
     "swagger-autogen": "^2.23.7",
     "ts-jest": "^29.2.5"
+  },
+  "jest": {
+    "verbose": true,
+    "preset": "@shelf/jest-mongodb"
   }
 }

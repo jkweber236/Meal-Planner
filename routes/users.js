@@ -21,7 +21,7 @@ router.get('/:id', requiresAuth(), (req, res) => {
 // Get a user's favorites
 router.get('/:id/favorites', requiresAuth(), (req, res) => {
   // #swagger.tags = ['Users']
-  // #swagger.summary = 'Retrieve a user's favorites'
+  // #swagger.summary = "Retrieve a user's favorites"
   usersController.getFavorites(req, res);
 });
 
