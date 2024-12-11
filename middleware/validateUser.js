@@ -1,14 +1,15 @@
 const validator = require('../helpers/validate');
 const { check, validationResult } = require('express-validator');
 
-const saveRecipe = (req, res, next) => {
+const saveUser = (req, res, next) => {
   const validationRule = {
-    name: 'required|string',
-    category: 'string',
-    ingredients: 'required|array',
-    instructions: 'required|array',
-    prepTime: 'integer',
-    cookTime: 'integer'
+    username: 'required|string',
+    password: 'required|string',
+    email: 'required|email',
+    createdRecipes: 'array',
+    favoriteRecipes: 'array',
+    mealPlans: 'array',
+    groceryList: 'string'
   };
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
@@ -24,8 +25,8 @@ const saveRecipe = (req, res, next) => {
 };
 
 const validateID = [
-  check('id').optional().isMongoId().withMessage('Invalid ID format'),
-  check('userid').optional().isMongoId().withMessage('Invalid user ID format'),
+  check('id').isMongoId().withMessage('Invalid ID format'),
+  check('recipeID').optional().isMongoId().withMessage('Invalid recipe ID format'),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -55,7 +56,7 @@ const limitGetAll = (req, res, next) => {
 };
 
 module.exports = {
-  saveRecipe,
+  saveUser,
   validateID,
   limitGetAll
 };

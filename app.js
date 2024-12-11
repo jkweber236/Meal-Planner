@@ -11,8 +11,8 @@ const config = {
   auth0Logout: true,
   secret: process.env.SECRET,
   baseURL: 'http://localhost:3000',
-  clientID: 'd6pziGH6szkwHUsypL1src6rDvPcGpkH',
-  issuerBaseURL: 'https://dev-miy8hcfxznthy6sk.us.auth0.com'
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUER_BASE_URL
 };
 
 // Apply authentication middleware
@@ -20,10 +20,9 @@ app.use(auth(config));
 
 // Root route
 app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+  res.status(200).json({ status: req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out' });
 });
 
-// Apply other middlewares and routes
 app
   .use(bodyParser.json())
   .use('/', routes)
@@ -32,7 +31,6 @@ app
     next();
   });
 
-// Global error handling for uncaught exceptions
 process.on('uncaughtException', (err, origin) => {
   console.error(`Caught exception: ${err}\nException origin: ${origin}`);
 });

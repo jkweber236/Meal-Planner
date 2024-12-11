@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const groceryListController = require('../controllers/groceryList');
 const requiresAuth = require('../middleware/requiresAuth');
+const validator = require('../middleware/validateGroceryList');
 
 // Get a grocery list by ID
-router.get('/:id', (req, res) => {
+router.get('/:id', validator.validateID, (req, res) => {
   // #swagger.tags = ['Grocery Lists']
   // #swagger.summary = 'Retrieve a grocery list by ID'
   // #swagger.parameters['id'] = { description: 'Grocery List ID' }
@@ -12,14 +13,14 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a new grocery list
-router.post('/', requiresAuth(), (req, res) => {
+router.post('/', validator.saveGroceryList, requiresAuth(), (req, res) => {
   // #swagger.tags = ['Grocery Lists']
   // #swagger.summary = 'Create a new grocery list'
   groceryListController.createGroceryList(req, res);
 });
 
 // Update a grocery list by ID
-router.put('/:id', requiresAuth(), (req, res) => {
+router.put('/:id', validator.saveGroceryList, validator.validateID, requiresAuth(), (req, res) => {
   // #swagger.tags = ['Grocery Lists']
   // #swagger.summary = 'Update a grocery list by ID'
   // #swagger.parameters['id'] = { description: 'Grocery List ID' }
@@ -27,7 +28,7 @@ router.put('/:id', requiresAuth(), (req, res) => {
 });
 
 // Delete a grocery list by ID
-router.delete('/:id', requiresAuth(), (req, res) => {
+router.delete('/:id', validator.validateID, requiresAuth(), (req, res) => {
   // #swagger.tags = ['Grocery Lists']
   // #swagger.summary = 'Delete a grocery list by ID'
   // #swagger.parameters['id'] = { description: 'Grocery List ID' }

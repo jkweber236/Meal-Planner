@@ -1,8 +1,6 @@
-const { ObjectId } = require('mongodb');
-
 // Mock express-openid-connect before importing app
 jest.mock('express-openid-connect', () => ({
-  auth: jest.fn(() => (req, res, next) => next()) // Bypass auth middleware
+  auth: jest.fn(() => (req, res, next) => next())
 }));
 
 // Mock requiresAuth middleware
@@ -49,7 +47,7 @@ const mockMealPlans = [
 
 // Mock the database connection
 jest.mock('../db/connect', () => {
-  const { ObjectId } = require('mongodb'); // Import ObjectId here
+  const { ObjectId } = require('mongodb');
   return {
     getDb: jest.fn(() => ({
       db: jest.fn(() => ({
@@ -84,7 +82,7 @@ jest.mock('../db/connect', () => {
 });
 
 const request = require('supertest');
-const app = require('../app'); // Import the app, not server.js
+const app = require('../app');
 
 describe('Meal Plans API', () => {
   // Get a single meal plan
