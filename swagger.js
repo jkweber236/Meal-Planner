@@ -5,8 +5,8 @@ const doc = {
     title: 'My API',
     description: 'Meal Planner API'
   },
-  host: 'localhost:3000',
-  schemes: ['http'],
+  host: 'meal-planner-dot1.onrender.com',
+  schemes: ['https'],
   tags: [
     { name: 'Users', description: 'Endpoints for managing users' },
     { name: 'Recipes', description: 'Endpoints for managing recipes' },
