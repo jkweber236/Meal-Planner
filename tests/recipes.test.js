@@ -206,18 +206,48 @@ describe('Recipes API', () => {
   // Create a new recipe
   test('should create a new recipe', async () => {
     const newrecipe = {
-      creatorID: 'user125',
       name: 'example',
       category: 'example',
-      ingredients: [],
-      instructions: [],
-      prepTime: '10000 minutes',
-      cookTime: '10000 minutes',
-      createdDate: 'today'
+      ingredients: [
+        {
+          item: 'Spaghetti',
+          quantity: '200g'
+        },
+        {
+          item: 'Eggs',
+          quantity: '2 large'
+        },
+        {
+          item: 'Parmesan Cheese',
+          quantity: '50g'
+        },
+        {
+          item: 'Pancetta',
+          quantity: '100g'
+        },
+        {
+          item: 'Black Pepper',
+          quantity: 'to taste'
+        },
+        {
+          item: 'Salt',
+          quantity: 'to taste'
+        }
+      ],
+      instructions: [
+        'Cook the spaghetti in salted boiling water until al dente.',
+        'In a bowl, whisk the eggs with grated Parmesan cheese.',
+        'Fry the pancetta until crispy.',
+        'Drain the pasta, reserving some cooking water.',
+        'Mix the hot pasta with the egg and cheese mixture, adding reserved water if needed.',
+        'Stir in the pancetta and season with black pepper.'
+      ],
+      prepTime: 10000,
+      cookTime: 10000
     };
 
     const userid = '6744d93c9476bc5699b1182a';
-    const res = await request(app).post(`/recipes/:userid`).send(newrecipe);
+    const res = await request(app).post(`/recipes/${userid}`).send(newrecipe);
 
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('acknowledged', true);
@@ -227,14 +257,44 @@ describe('Recipes API', () => {
   // Alter an existing recipe
   test('should edit an existing recipe', async () => {
     const alteredrecipe = {
-      creatorID: 'user125',
       name: 'example',
       category: 'example',
-      ingredients: [],
-      instructions: [],
-      prepTime: '10000 minutes',
-      cookTime: '10000 minutes',
-      createdDate: 'today'
+      ingredients: [
+        {
+          item: 'Spaghetti',
+          quantity: '200g'
+        },
+        {
+          item: 'Eggs',
+          quantity: '2 large'
+        },
+        {
+          item: 'Parmesan Cheese',
+          quantity: '50g'
+        },
+        {
+          item: 'Pancetta',
+          quantity: '100g'
+        },
+        {
+          item: 'Black Pepper',
+          quantity: 'to taste'
+        },
+        {
+          item: 'Salt',
+          quantity: 'to taste'
+        }
+      ],
+      instructions: [
+        'Cook the spaghetti in salted boiling water until al dente.',
+        'In a bowl, whisk the eggs with grated Parmesan cheese.',
+        'Fry the pancetta until crispy.',
+        'Drain the pasta, reserving some cooking water.',
+        'Mix the hot pasta with the egg and cheese mixture, adding reserved water if needed.',
+        'Stir in the pancetta and season with black pepper.'
+      ],
+      prepTime: 10000,
+      cookTime: 10000
     };
 
     const recipeId = '6740492e5a6a3656aaee96fa';
