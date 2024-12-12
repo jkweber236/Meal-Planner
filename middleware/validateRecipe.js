@@ -41,16 +41,7 @@ const validateID = [
 
 // Limit get all endpoints so that attackers cannot overwhelm the system.
 const limitGetAll = (req, res, next) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
-
-  // Validate that limit is not greater than 100
-  if (limit > 100) {
-    return res.status(400).send({
-      success: false,
-      message: 'Limit cannot exceed 100'
-    });
-  }
+  req.limit = 100; // Set a fixed limit of 100 items
   next();
 };
 
